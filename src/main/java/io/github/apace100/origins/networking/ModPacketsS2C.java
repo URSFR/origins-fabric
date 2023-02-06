@@ -73,18 +73,6 @@ public class ModPacketsS2C {
 
     @Environment(EnvType.CLIENT)
     private static void openOriginScreen(MinecraftClient minecraftClient, ClientPlayNetworkHandler clientPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {
-        boolean showDirtBackground = packetByteBuf.readBoolean();
-        minecraftClient.execute(() -> {
-            ArrayList<OriginLayer> layers = new ArrayList<>();
-            OriginComponent component = ModComponents.ORIGIN.get(minecraftClient.player);
-            OriginLayers.getLayers().forEach(layer -> {
-                if(layer.isEnabled() && !component.hasOrigin(layer)) {
-                    layers.add(layer);
-                }
-            });
-            Collections.sort(layers);
-            minecraftClient.setScreen(new ChooseOriginScreen(layers, 0, showDirtBackground));
-        });
     }
 
     @Environment(EnvType.CLIENT)
